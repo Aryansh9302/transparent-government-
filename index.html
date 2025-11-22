@@ -4,244 +4,237 @@
   <meta charset="UTF-8" />
   <title>Bhartiya Democracy | Transparent Government System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- MAIN STYLES -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <!-- Top Navigation / Header -->
-  <header class="top-header">
-    <div class="logo-title">
-      <div class="flag-icon">
-        <span class="saffron"></span>
-        <span class="white"></span>
-        <span class="green"></span>
-        <div class="chakra"></div>
+  <!-- ============ SIDE LANGUAGE SWITCHER ============ -->
+  <aside class="language-sidebar">
+    <button class="lang-toggle" id="langToggle" aria-label="Change language">
+      🌐
+      <span class="lang-current" id="langCurrent">EN</span>
+    </button>
+
+    <div class="lang-panel" id="langPanel" aria-label="Language selector">
+      <h3 class="lang-title" data-i18n="language_title">Languages</h3>
+      <div class="lang-list">
+        <!-- 22 languages of the Constitution + English -->
+        <button class="lang-option" data-lang="en">English</button>
+        <button class="lang-option" data-lang="hi">हिन्दी</button>
+        <button class="lang-option" data-lang="bn">বাংলা</button>
+        <button class="lang-option" data-lang="as">অসমীয়া</button>
+        <button class="lang-option" data-lang="gu">ગુજરાતી</button>
+        <button class="lang-option" data-lang="kn">ಕನ್ನಡ</button>
+        <button class="lang-option" data-lang="ks">كश्मीरى</button>
+        <button class="lang-option" data-lang="kok">कोंकणी</button>
+        <button class="lang-option" data-lang="ml">മലയാളം</button>
+        <button class="lang-option" data-lang="mr">मराठी</button>
+        <button class="lang-option" data-lang="ne">नेपाली</button>
+        <button class="lang-option" data-lang="or">ଓଡ଼ିଆ</button>
+        <button class="lang-option" data-lang="pa">ਪੰਜਾਬੀ</button>
+        <button class="lang-option" data-lang="sa">संस्कृतम्</button>
+        <button class="lang-option" data-lang="sd">سنڌي</button>
+        <button class="lang-option" data-lang="ta">தமிழ்</button>
+        <button class="lang-option" data-lang="te">తెలుగు</button>
+        <button class="lang-option" data-lang="ur">اردو</button>
+        <button class="lang-option" data-lang="brx">बड़ो (Bodo)</button>
+        <button class="lang-option" data-lang="sat">ᱥᱟᱱᱛᱟᱲᱤ (Santali)</button>
+        <button class="lang-option" data-lang="mai">मैथिली</button>
+        <button class="lang-option" data-lang="doi">डोगरी</button>
+        <button class="lang-option" data-lang="mni">মেইতেইইলোন্ (Manipuri)</button>
       </div>
-      <div class="title-block">
-        <h1>Bhartiya Democracy</h1>
-        <p class="subtitle">Transparent Government System</p>
+    </div>
+  </aside>
+
+  <!-- ============ TOP NAVBAR ============ -->
+  <header class="top-header">
+    <div class="brand">
+      <div class="flag-vertical">
+        <span class="flag-saffron"></span>
+        <span class="flag-white"></span>
+        <span class="flag-green"></span>
+      </div>
+      <div class="brand-text">
+        <h1 class="brand-title" data-i18n="brand_title">Bhartiya Democracy</h1>
+        <p class="brand-tagline" data-i18n="brand_tagline">सत्यमेव जयते</p>
       </div>
     </div>
 
     <nav class="main-nav">
-      <a href="#top">Home</a>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#trust">Trust & Security</a>
+      <a href="#home" class="nav-link" data-i18n="nav_home">Home</a>
+      <a href="#central-section" class="nav-link" data-i18n="nav_central">Central Projects</a>
+      <a href="#state-section" class="nav-link" data-i18n="nav_state">
+        <span class="nav-icon">👁️</span>
+        <span data-i18n="nav_state_text">State Projects</span>
+      </a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <main id="top">
-    <section class="hero">
-      <div class="hero-text">
-        <h2>Making Every Rupee Visible to Every Citizen</h2>
-        <p>
-          Bhartiya Democracy is a concept platform that shows complete
-          transparency of government projects – from
-          <strong>amount announced</strong> to
-          <strong>sanctioned</strong>, <strong>used</strong>, and
-          <strong>digitally signed</strong> transactions between
-          government, private organisations, and individuals.
+  <!-- ============ MAIN CONTENT ============ -->
+  <main>
+
+    <!-- ---------- HERO SECTION ---------- -->
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <p class="hero-kicker" data-i18n="hero_kicker">Transparent Government System</p>
+
+        <h2 class="hero-title" data-i18n="hero_title">
+          Complete transparency in government projects, expenditures, and contracts.
+        </h2>
+
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
+          Every rupee, every project, every transaction – visible to every citizen.
         </p>
+
         <div class="hero-actions">
-          <button class="primary-btn" data-scroll="#projects">
+          <button class="btn primary" data-scroll="#central-section" data-i18n="btn_view_central">
             View Central Projects
           </button>
-          <button class="ghost-btn" data-scroll="#projects">
+          <button class="btn outline" data-scroll="#state-section" data-i18n="btn_view_state">
             View State & UT Projects
           </button>
         </div>
-        <p class="view-only-note">
-          24/7 read-only access for every citizen. No edits, only
-          <strong>truth & transparency</strong>.
+
+        <p class="hero-note" data-i18n="hero_note">
+          24/7 public access • View-only mode • Digitally signed by both parties.
         </p>
       </div>
 
-      <div class="hero-visual">
-        <!-- Replace the src with your own India map image if you have one -->
-        <div class="map-card">
-          <div class="map-header">
-            <span class="dot dot-saffron"></span>
-            <span class="dot dot-white"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <div class="map-body">
-            <div class="map-india">
-              <!-- Placeholder map block -->
-              <span class="map-label">India</span>
-            </div>
-            <p class="map-caption">
-              Nation-wide coverage: Central + all States & Union Territories.
-            </p>
-          </div>
+      <div class="hero-features">
+        <div class="feature-card">
+          <div class="feature-icon">👁️</div>
+          <h3 class="feature-title" data-i18n="feature_1_title">24/7 Public Access</h3>
+          <p class="feature-text" data-i18n="feature_1_text">
+            View all government projects and their financial details anytime, anywhere.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-title" data-i18n="feature_2_title">Digital Signatures</h3>
+          <p class="feature-text" data-i18n="feature_2_text">
+            Every transaction verified with digital signatures from both providing and receiving parties.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌏</div>
+          <h3 class="feature-title" data-i18n="feature_3_title">Complete Coverage</h3>
+          <p class="feature-text" data-i18n="feature_3_text">
+            Central, State, and District level projects across all departments and sectors.
+          </p>
         </div>
       </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-      <h2>About the Transparent Government System</h2>
-      <p>
-        This sample website demonstrates how a transparent digital system for
-        Indian governance could look. Citizens can track all types of
-        government projects, subsidies, schemes, and contracts. Every
-        transaction is:
-      </p>
-      <ul class="about-list">
-        <li>Digitally signed by both <strong>providing</strong> and <strong>receiving</strong> parties.</li>
-        <li>Time-stamped and stored in a secure ledger.</li>
-        <li>Available in real-time, 24/7, in view-only mode to all citizens.</li>
-        <li>Classified as <strong>Central</strong> or <strong>State / UT</strong> projects.</li>
-      </ul>
-    </section>
-
-    <!-- Project Dashboard Section -->
-    <section id="projects" class="project-dashboard">
-      <div class="section-header">
-        <h2>Project Transparency Dashboard</h2>
-        <p>Select Central or State/UT projects and explore sample data.</p>
+      <div class="hero-map">
+        <div class="map-overlay">
+          <span class="map-strip strip-saffron"></span>
+          <span class="map-strip strip-white"></span>
+          <span class="map-strip strip-green"></span>
+        </div>
+        <div class="map-label" data-i18n="hero_map_label">Map of India</div>
       </div>
+    </section>
 
-      <!-- Tabs -->
-      <div class="tabs">
-        <button class="tab-btn active" data-target="central-panel">
-          Central Government Projects
+    <!-- ---------- PROJECT BROWSER SECTION ---------- -->
+    <section class="projects-shell" id="projects">
+      <h2 class="section-heading" data-i18n="projects_heading">
+        Browse Government Projects
+      </h2>
+
+      <!-- Tabs: central / state -->
+      <div class="project-tabs">
+        <button class="project-tab active" data-tab="central-section">
+          <span class="tab-icon">🏛️</span>
+          <span data-i18n="tab_central">Central Government</span>
         </button>
-        <button class="tab-btn" data-target="state-panel">
-          State & Union Territory Projects
+        <button class="project-tab" data-tab="state-section">
+          <span class="tab-icon">📍</span>
+          <span data-i18n="tab_state">State Government</span>
         </button>
-      </div>
-
-      <!-- CENTRAL PROJECTS PANEL -->
-      <div id="central-panel" class="tab-panel active">
-        <div class="filter-bar">
-          <div class="filter-group">
-            <label for="central-ministry">Ministry</label>
-            <select id="central-ministry">
-              <option value="all">All Ministries</option>
-              <option value="MoR">Railways</option>
-              <option value="MoRD">Rural Development</option>
-              <option value="MoHFW">Health & Family Welfare</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="central-sector">Sector</label>
-            <select id="central-sector">
-              <option value="all">All Sectors</option>
-              <option value="infrastructure">Infrastructure</option>
-              <option value="health">Health</option>
-              <option value="education">Education</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="table-wrapper">
-          <table class="project-table" id="central-table">
-            <thead>
-              <tr>
-                <th>Project Name</th>
-                <th>Ministry</th>
-                <th>Sector</th>
-                <th>Announced (₹)</th>
-                <th>Sanctioned (₹)</th>
-                <th>Used (₹)</th>
-                <th>Provider</th>
-                <th>Receiver</th>
-                <th>Digital Signature</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Filled by JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- STATE / UT PROJECTS PANEL -->
-      <div id="state-panel" class="tab-panel">
-        <div class="state-filters">
-          <div class="filter-group wide">
-            <label for="state-select">State / Union Territory</label>
-            <select id="state-select">
-              <!-- Options filled by JS -->
-            </select>
-          </div>
-          <div class="filter-group wide">
-            <label for="district-select">District</label>
-            <select id="district-select">
-              <option value="">Select a state first</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="table-wrapper">
-          <table class="project-table" id="state-table">
-            <thead>
-              <tr>
-                <th>Project Name</th>
-                <th>State / UT</th>
-                <th>District</th>
-                <th>Announced (₹)</th>
-                <th>Sanctioned (₹)</th>
-                <th>Used (₹)</th>
-                <th>Provider</th>
-                <th>Receiver</th>
-                <th>Digital Signature</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Filled by JS -->
-            </tbody>
-          </table>
-        </div>
       </div>
     </section>
 
-    <!-- Trust & Security Section -->
-    <section id="trust" class="trust">
-      <h2>Trust, Security & Digital Signatures</h2>
-      <div class="trust-grid">
-        <div class="trust-card">
-          <h3>Digitally Signed Transactions</h3>
-          <p>
-            Every transaction is digitally signed by both the
-            <strong>Government Department</strong> and the
-            <strong>implementing agency / individual</strong>, ensuring
-            authenticity and non-repudiation.
-          </p>
+    <!-- ---------- CENTRAL PROJECTS ---------- -->
+    <section class="projects-section" id="central-section">
+      <header class="section-header">
+        <h2 data-i18n="central_title">Central Government Projects</h2>
+        <p data-i18n="central_desc">
+          Projects funded and managed by the Central Government, visible with real-time financial utilization.
+        </p>
+      </header>
+
+      <!-- Filters (if needed later) -->
+      <div class="filters-row">
+        <div class="filter-group">
+          <label for="centralMinistry" data-i18n="filter_ministry">Ministry</label>
+          <select id="centralMinistry">
+            <option value="all" data-i18n="filter_all_ministry">All Ministries</option>
+          </select>
         </div>
-        <div class="trust-card">
-          <h3>Immutable Records</h3>
-          <p>
-            Once published, records cannot be edited or deleted. Citizens can
-            always see a tamper-proof history of project funding and usage.
-          </p>
+
+        <div class="filter-group">
+          <label for="centralSector" data-i18n="filter_sector">Sector</label>
+          <select id="centralSector">
+            <option value="all" data-i18n="filter_all_sector">All Sectors</option>
+          </select>
         </div>
-        <div class="trust-card">
-          <h3>Nation-First Transparency</h3>
-          <p>
-            Inspired by the colours of our Tiranga and the map of India, this
-            system symbolises unity, accountability, and the spirit of
-            <strong>Sabka Saath, Sabka Vikas</strong>.
-          </p>
+      </div>
+
+      <!-- Project cards injected by JS -->
+      <div class="projects-grid" id="centralProjectsContainer">
+        <!-- JS will render 14–15 central projects here -->
+      </div>
+    </section>
+
+    <!-- ---------- STATE / UT PROJECTS ---------- -->
+    <section class="projects-section" id="state-section">
+      <header class="section-header">
+        <h2 data-i18n="state_title">State & Union Territory Projects</h2>
+        <p data-i18n="state_desc">
+          Select a State or Union Territory and district to explore localized projects and their financial status.
+        </p>
+      </header>
+
+      <!-- State / UT filters -->
+      <div class="filters-row">
+        <div class="filter-group">
+          <label for="stateSelect" data-i18n="filter_state">State / Union Territory</label>
+          <select id="stateSelect">
+            <!-- All States & UTs will be filled via JS -->
+          </select>
         </div>
+
+        <div class="filter-group">
+          <label for="districtSelect" data-i18n="filter_district">District</label>
+          <select id="districtSelect">
+            <option value="" data-i18n="filter_select_state_first">Select a state first</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- State project cards injected by JS -->
+      <div class="projects-grid" id="stateProjectsContainer">
+        <!-- JS will render one sample project per state/UT -->
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- ============ FOOTER ============ -->
   <footer class="site-footer">
-    <div class="footer-flag">
-      <span class="saffron"></span>
-      <span class="white"></span>
-      <span class="green"></span>
+    <div class="footer-inner">
+      <p class="footer-text">
+        © <span id="year"></span>
+        <span data-i18n="footer_title">Bhartiya Democracy - Transparency in Governance</span>
+      </p>
+      <p class="footer-subtext" data-i18n="footer_subtext">
+        Every citizen has the right to know how public funds are utilized.
+      </p>
     </div>
-    <p>
-      Sample Front-End Concept &copy; <span id="year"></span> Bhartiya Democracy.
-      For academic / demonstration purposes only.
-    </p>
   </footer>
 
+  <!-- MAIN SCRIPT -->
   <script src="script.js"></script>
 </body>
 </html>
