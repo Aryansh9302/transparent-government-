@@ -1,822 +1,455 @@
-/* ===================== ROOT & GLOBAL ===================== */
-:root {
-  --saffron: #ff8a2a;
-  --saffron-deep: #ff6a00;
-  --white: #ffffff;
-  --green: #1aa34a;
-  --green-deep: #008c3b;
-  --navy: #23395d;
-  --bg-soft: #fff8f0;
-  --bg-card: #ffffff;
-  --border-soft: #e7e7f2;
-  --shadow-soft: 0 14px 35px rgba(15, 23, 42, 0.08);
-  --radius-lg: 22px;
-  --radius-md: 16px;
-  --radius-pill: 999px;
-  --text-main: #111827;
-  --text-muted: #6b7280;
-  --transition-fast: 0.18s ease;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: var(--text-main);
-  background: radial-gradient(circle at top left, #fff5ea 0, #ffffff 50%);
-}
-
-body {
-  min-height: 100vh;
-}
-
-/* ===================== LANGUAGE SIDEBAR ===================== */
-
-.language-sidebar {
-  position: fixed;
-  right: 1.2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 120;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-}
-
-/* Small round button */
-.lang-toggle {
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.55rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  background: #111827;
-  color: #f9fafb;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.5);
-}
-
-.lang-current {
-  font-weight: 600;
-}
-
-/* Panel */
-.lang-panel {
-  position: relative;
-  width: 260px;
-  max-height: 420px;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #f9fafb;
-  box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  padding: 0.7rem 0.75rem 0.85rem;
-  transform-origin: right center;
-  transform: scale(0.95);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
-}
-
-.lang-panel.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-}
-
-.lang-title {
-  margin: 0 0 0.4rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--navy);
-}
-
-.lang-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.32rem;
-  max-height: 360px;
-  overflow: auto;
-}
-
-/* Hide native scrollbar but keep scrollability */
-.lang-list::-webkit-scrollbar {
-  width: 5px;
-}
-.lang-list::-webkit-scrollbar-thumb {
-  background: #cbd5f5;
-  border-radius: 999px;
-}
-
-.lang-option {
-  border-radius: 999px;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  background: #edf2ff;
-  color: #111827;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: background var(--transition-fast), transform var(--transition-fast);
-}
-
-.lang-option:hover {
-  background: #e0e7ff;
-  transform: translateY(-1px);
-}
-
-.lang-option.active {
-  background: linear-gradient(135deg, var(--saffron), var(--green));
-  color: #ffffff;
-}
-
-/* ===================== TOP HEADER / NAVBAR ===================== */
-
-.top-header {
-  position: sticky;
-  z-index: 80;
-  top: 0;
-  backdrop-filter: blur(14px);
-  background: linear-gradient(
-    to bottom,
-    rgba(17, 24, 39, 0.92),
-    rgba(17, 24, 39, 0.94)
-  );
-  color: #f9fafb;
-  border-bottom: 3px solid var(--saffron-deep);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.65rem 2.3rem;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.flag-vertical {
-  display: flex;
-  flex-direction: column;
-  width: 12px;
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(249, 250, 251, 0.7);
-}
-
-.flag-vertical span {
-  flex: 1;
-}
-
-.flag-saffron {
-  background: var(--saffron);
-}
-.flag-white {
-  background: #ffffff;
-}
-.flag-green {
-  background: var(--green);
-}
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.brand-title {
-  margin: 0;
-  font-size: 1.15rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.brand-tagline {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #e5e7eb;
-}
-
-/* Nav */
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #e5e7eb;
-  font-size: 0.9rem;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  transition: background var(--transition-fast), color var(--transition-fast),
-    transform var(--transition-fast);
-}
-
-.nav-link:hover {
-  background: rgba(243, 244, 246, 0.12);
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-
-.nav-icon {
-  font-size: 0.95rem;
-}
-
-/* ===================== HERO ===================== */
-
-.hero {
-  position: relative;
-  padding: 2.5rem 2.3rem 2.2rem;
-  background: radial-gradient(circle at top, #fff5ea 0, #ffffff 45%, #e9ffe9 100%);
-  overflow: hidden;
-}
-
-.hero-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.hero-kicker {
-  margin: 0 0 0.4rem;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--navy);
-}
-
-.hero-title {
-  margin: 0 0 0.6rem;
-  font-size: 1.9rem;
-  font-weight: 800;
-}
-
-.hero-subtitle {
-  margin: 0 0 1rem;
-  color: var(--text-muted);
-  font-size: 0.98rem;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.8rem;
-  margin-bottom: 0.7rem;
-}
-
-.btn {
-  border-radius: var(--radius-pill);
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  padding: 0.65rem 1.5rem;
-  font-size: 0.9rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-    background var(--transition-fast), color var(--transition-fast);
-}
-
-.btn.primary {
-  background: linear-gradient(120deg, var(--saffron-deep), var(--green-deep));
-  color: #ffffff;
-  box-shadow: var(--shadow-soft);
-}
-
-.btn.primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
-}
-
-.btn.outline {
-  background: transparent;
-  border: 1.7px solid var(--navy);
-  color: var(--navy);
-}
-
-.btn.outline:hover {
-  background: rgba(17, 24, 39, 0.06);
-  transform: translateY(-1px);
-}
-
-/* hero note */
-.hero-note {
-  margin: 0.3rem 0 1.7rem;
-  font-size: 0.84rem;
-  color: var(--text-muted);
-}
-
-/* Feature cards under hero */
-.hero-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1rem;
-  max-width: 980px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  position: relative;
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  border-top: 3.2px solid transparent;
-  box-shadow: var(--shadow-soft);
-  padding: 1rem 1.1rem 1.2rem;
-  overflow: hidden;
-}
-
-.feature-card:nth-child(1) {
-  border-top-color: var(--saffron-deep);
-}
-.feature-card:nth-child(2) {
-  border-top-color: #2563eb;
-}
-.feature-card:nth-child(3) {
-  border-top-color: var(--green-deep);
-}
-
-.feature-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 14px;
-  background: #fff1e5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
-}
-
-.feature-title {
-  margin: 0 0 0.25rem;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.feature-text {
-  margin: 0;
-  font-size: 0.86rem;
-  color: var(--text-muted);
-}
-
-/* Subtle India map background behind features */
-.hero-map {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
-}
-
-.map-overlay {
-  position: absolute;
-  width: 380px;
-  height: 520px;
-  border-radius: 160px;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.2) 0,
-    rgba(0, 0, 0, 0.08) 95%
-  );
-  overflow: hidden;
-}
-
-.map-strip {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 33.33%;
-}
-
-.strip-saffron {
-  top: 0;
-  background: linear-gradient(to bottom, var(--saffron), transparent);
-}
-.strip-white {
-  top: 33.33%;
-  background: rgba(255, 255, 255, 0.9);
-}
-.strip-green {
-  bottom: 0;
-  background: linear-gradient(to top, var(--green), transparent);
-}
-
-.map-label {
-  position: relative;
-  z-index: 1;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid rgba(17, 24, 39, 0.14);
-  backdrop-filter: blur(12px);
-  background: rgba(249, 250, 251, 0.9);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* ===================== PROJECT SHELL + TABS ===================== */
-
-.projects-shell {
-  text-align: center;
-  padding: 1.4rem 2.3rem 0.1rem;
-}
-
-.section-heading {
-  margin: 0 0 1rem;
-  font-size: 1.35rem;
-}
-
-.project-tabs {
-  display: inline-flex;
-  padding: 0.3rem;
-  border-radius: 999px;
-  background: #f4f4ff;
-  box-shadow: inset 0 0 0 1px #e2e5ff;
-  gap: 0.25rem;
-}
-
-.project-tab {
-  border-radius: 999px;
-  border: none;
-  background: transparent;
-  padding: 0.45rem 1.1rem;
-  font-size: 0.88rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: #4b5563;
-  font-weight: 600;
-  transition: background var(--transition-fast), color var(--transition-fast),
-    transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.project-tab.active {
-  background: linear-gradient(120deg, var(--saffron), var(--green));
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-soft);
-}
-
-.tab-icon {
-  font-size: 1rem;
-}
-
-/* ===================== PROJECT SECTIONS ===================== */
-
-.projects-section {
-  padding: 1.6rem 2.3rem 1.8rem;
-}
-
-.section-header {
-  max-width: 920px;
-  margin: 0 auto 1.1rem;
-}
-
-.section-header h2 {
-  margin: 0 0 0.3rem;
-  font-size: 1.25rem;
-}
-
-.section-header p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-/* Filter row */
-.filters-row {
-  max-width: 920px;
-  margin: 0 auto 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 0.8rem;
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  font-size: 0.85rem;
-}
-
-.filter-group label {
-  font-weight: 600;
-  color: #4b5563;
-}
-
-.filter-group select {
-  border-radius: 999px;
-  border: 1px solid var(--border-soft);
-  padding: 0.45rem 0.85rem;
-  background: #f9fafb;
-  font-size: 0.85rem;
-  outline: none;
-}
-
-.filter-group select:focus {
-  border-color: var(--navy);
-}
-
-/* Project cards */
-.projects-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.2rem;
-}
-
-.project-card {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  border-left: 3px solid var(--saffron-deep);
-  padding: 1.05rem 1.1rem 0.9rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.project-card-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.6rem;
-  align-items: flex-start;
-}
-
-.project-name {
-  margin: 0 0 0.18rem;
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-.project-desc {
-  margin: 0;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-
-.badges-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.35rem;
-}
-
-.status-pill {
-  padding: 0.2rem 0.65rem;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  border: none;
-  background: #e0edff;
-  color: #1d4ed8;
-}
-
-.status-pill.approved {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.status-pill.completed {
-  background: #d1fae5;
-  color: #065f46;
-}
-
-/* meta line */
-.project-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  align-items: center;
-}
-
-.meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-/* metrics */
-.metric-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin-top: 0.4rem;
-}
-
-.metric-card {
-  border-radius: var(--radius-md);
-  padding: 0.55rem 0.6rem;
-  font-size: 0.76rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.metric-label {
-  color: #6b7280;
-}
-
-.metric-value {
-  font-weight: 700;
-  font-size: 0.82rem;
-}
-
-/* different metric background colors */
-.metric-announced {
-  background: #eef2ff;
-}
-.metric-sanctioned {
-  background: #e6f9f0;
-}
-.metric-used {
-  background: #fff4e5;
-}
-.metric-remaining {
-  background: #f3e8ff;
-}
-
-/* utilization */
-.utilization-row {
-  margin-top: 0.45rem;
-  font-size: 0.76rem;
-}
-
-.utilization-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.25rem;
-  color: #4b5563;
-}
-
-.progress-track {
-  width: 100%;
-  height: 6px;
-  border-radius: 999px;
-  background: #e5e7eb;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--green), var(--green-deep));
-  transition: width 0.3s ease-out;
-}
-
-/* contractor */
-.contractor-row {
-  margin-top: 0.6rem;
-  padding: 0.55rem 0.6rem;
-  border-radius: 14px;
-  background: #f9fafb;
-  display: flex;
-  flex-direction: column;
-  gap: 0.12rem;
-  font-size: 0.8rem;
-}
-
-.contractor-name {
-  font-weight: 600;
-}
-
-.contractor-type {
-  color: var(--text-muted);
-  font-size: 0.78rem;
-}
-
-/* digital signature link display */
-.signatures-link {
-  margin-top: 0.3rem;
-  font-size: 0.8rem;
-  color: var(--saffron-deep);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2rem;
-  text-decoration: none;
-}
-
-.signatures-link:hover {
-  text-decoration: underline;
-}
-
-/* ===================== FOOTER ===================== */
-
-.site-footer {
-  padding: 0.25rem 1.5rem 1.25rem;
-  margin-top: 0.6rem;
-  background: linear-gradient(
-    to right,
-    var(--saffron),
-    #ffffff 45%,
-    var(--green)
-  );
-}
-
-.footer-inner {
-  max-width: 1020px;
-  margin: 0.2rem auto 0;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 18px;
-  text-align: center;
-  padding: 0.7rem 0.9rem 0.8rem;
-  font-size: 0.82rem;
-  color: #4b5563;
-}
-
-.footer-text {
-  margin: 0 0 0.2rem;
-}
-
-.footer-subtext {
-  margin: 0;
-  font-size: 0.78rem;
-}
-
-/* ===================== UTILITIES & RESPONSIVE ===================== */
-
-@media (max-width: 1024px) {
-  .hero {
-    padding-inline: 1.5rem;
-  }
-
-  .projects-shell,
-  .projects-section {
-    padding-inline: 1.5rem;
-  }
-}
-
-@media (max-width: 800px) {
-  .top-header {
-    padding-inline: 1.1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.45rem;
-  }
-
-  .main-nav {
-    gap: 0.7rem;
-    flex-wrap: wrap;
-  }
-
-  .metric-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .language-sidebar {
-    right: 0.6rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero {
-    padding-inline: 1rem;
-  }
-
-  .projects-shell,
-  .projects-section {
-    padding-inline: 1rem;
-  }
-
-  .language-sidebar {
-    top: auto;
-    bottom: 1rem;
-    transform: none;
-  }
-
-  .lang-panel {
-    width: 230px;
-  }
+/* ============================================================
+   INITIAL SETUP
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  initLanguageSidebar();
+  initSmoothScroll();
+  initTabs();
+  initYear();
+  loadMinistriesAndSectors();
+  renderCentralProjects();
+  loadStateDropdown();
+  renderStateProjects();
+});
+
+/* ============================================================
+   LANGUAGE SWITCHER (22 Constitutional Languages)
+============================================================ */
+const langToggle = document.getElementById("langToggle");
+const langPanel = document.getElementById("langPanel");
+const langCurrent = document.getElementById("langCurrent");
+
+langToggle.onclick = () => langPanel.classList.toggle("open");
+
+function initLanguageSidebar() {
+  const languageButtons = document.querySelectorAll(".lang-option");
+
+  languageButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      languageButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const lang = btn.dataset.lang;
+      langCurrent.textContent = lang.toUpperCase();
+
+      applyLanguage(lang);
+    });
+  });
+}
+
+function applyLanguage(lang) {
+  // Minimal example: only headings change
+  const translations = {
+    hi: {
+      brand_title: "भारतीय लोकतंत्र",
+      brand_tagline: "सत्यमेव जयते",
+      nav_home: "मुखपृष्ठ",
+      nav_central: "केंद्रीय परियोजनाएँ",
+      nav_state: "राज्य परियोजनाएँ",
+      hero_title:
+        "सरकारी परियोजनाओं, खर्चों और अनुबंधों में पूर्ण पारदर्शिता।",
+      hero_subtitle:
+        "हर रुपये का हिसाब — हर नागरिक के लिए 24/7 उपलब्ध।",
+    },
+    en: {
+      brand_title: "Bhartiya Democracy",
+      brand_tagline: "Satyameva Jayate",
+      nav_home: "Home",
+      nav_central: "Central Projects",
+      nav_state: "State Projects",
+      hero_title:
+        "Complete transparency in government projects, expenditures, and contracts.",
+      hero_subtitle:
+        "Every rupee, every project, every transaction – visible to every citizen.",
+    },
+  };
+
+  const dict = translations[lang] || translations["en"];
+
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (dict[key]) el.textContent = dict[key];
+  });
+}
+
+/* ============================================================
+   SMOOTH SCROLL
+============================================================ */
+function initSmoothScroll() {
+  document.querySelectorAll("[data-scroll]").forEach((btn) => {
+    btn.onclick = () => {
+      const target = document.querySelector(btn.dataset.scroll);
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    };
+  });
+
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.onclick = (e) => {
+      const id = link.getAttribute("href");
+      if (id.startsWith("#")) {
+        e.preventDefault();
+        document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+      }
+    };
+  });
+}
+
+/* ============================================================
+   TABS (Central / State)
+============================================================ */
+function initTabs() {
+  const tabs = document.querySelectorAll(".project-tab");
+
+  tabs.forEach((tab) => {
+    tab.onclick = () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const sectionID = tab.dataset.tab;
+
+      document
+        .querySelector(sectionID)
+        .scrollIntoView({ behavior: "smooth" });
+    };
+  });
+}
+
+/* ============================================================
+   FOOTER YEAR
+============================================================ */
+function initYear() {
+  document.getElementById("year").textContent = new Date().getFullYear();
+}
+
+/* ============================================================
+   CENTRAL PROJECTS DATA (15 PROJECTS)
+============================================================ */
+const centralProjects = [
+  {
+    name: "National Highway 44 Expansion",
+    ministry: "Ministry of Road Transport",
+    sector: "Infrastructure",
+    desc: "Four-lane highway expansion from Delhi to Amritsar covering 450 km",
+    date: "2024-01-15",
+    announced: 8500000000,
+    sanctioned: 8200000000,
+    used: 6150000000,
+    contractor: "National Highways Authority of India",
+    contractorType: "Government",
+    status: "Ongoing",
+  },
+  {
+    name: "Digital India – Rural Connectivity",
+    ministry: "Ministry of Electronics & IT",
+    sector: "Technology",
+    desc: "Providing high-speed internet to 5000 villages across India",
+    date: "2024-03-01",
+    announced: 3000000000,
+    sanctioned: 2850000000,
+    used: 1425000000,
+    contractor: "Bharat Broadband Network",
+    contractorType: "Government",
+    status: "Ongoing",
+  },
+  {
+    name: "Swachh Bharat Phase 3",
+    ministry: "Ministry of Jal Shakti",
+    sector: "Cleanliness",
+    desc: "Construction of 10,000 community toilets and waste facilities",
+    date: "2025-01-01",
+    announced: 4500000000,
+    sanctioned: 4350000000,
+    used: 0,
+    contractor: "Swachh Bharat Mission",
+    contractorType: "Government",
+    status: "Approved",
+  },
+  {
+    name: "National Solar Mission – Grid Integration",
+    ministry: "Ministry of New & Renewable Energy",
+    sector: "Energy",
+    desc: "5000 MW solar power generation & national grid expansion",
+    date: "2023-06-01",
+    announced: 12000000000,
+    sanctioned: 11500000000,
+    used: 8050000000,
+    contractor: "Adani Green Energy",
+    contractorType: "Private",
+    status: "Ongoing",
+  },
+  {
+    name: "Ayushman Bharat – Health Infra",
+    ministry: "Ministry of Health & Family Welfare",
+    sector: "Health",
+    desc: "Setting up 500 health & wellness centers across India",
+    date: "2024-02-01",
+    announced: 5500000000,
+    sanctioned: 5300000000,
+    used: 3180000000,
+    contractor: "National Health Authority",
+    contractorType: "Government",
+    status: "Ongoing",
+  },
+  {
+    name: "Railway Station Modernization Program",
+    ministry: "Ministry of Railways",
+    sector: "Infrastructure",
+    desc: "Modernization of 50 major railway stations",
+    date: "2024-04-01",
+    announced: 7500000000,
+    sanctioned: 7250000000,
+    used: 3625000000,
+    contractor: "IRSDC",
+    contractorType: "Government",
+    status: "Ongoing",
+  },
+  {
+    name: "Ganga Rejuvenation Mission",
+    ministry: "Ministry of Jal Shakti",
+    sector: "Environment",
+    desc: "Cleaning & rejuvenation of the Ganga river",
+    date: "2023-01-10",
+    announced: 12000000000,
+    sanctioned: 11000000000,
+    used: 5500000000,
+    contractor: "National Mission for Clean Ganga",
+    contractorType: "Government",
+    status: "Ongoing",
+  },
+  {
+    name: "Smart City India – Phase II",
+    ministry: "Ministry of Urban Development",
+    sector: "Urban",
+    desc: "Upgrading 45 smart cities with advanced sensors and lighting",
+    date: "2024-03-11",
+    announced: 6500000000,
+    sanctioned: 6000000000,
+    used: 3100000000,
+    contractor: "L&T Infra",
+    contractorType: "Private",
+    status: "Approved",
+  },
+  {
+    name: "PM Awas Yojana Urban",
+    ministry: "Ministry of Housing",
+    sector: "Housing",
+    desc: "Construction of 4 lakh affordable houses in Tier-2 cities",
+    date: "2024-05-15",
+    announced: 7000000000,
+    sanctioned: 6800000000,
+    used: 4000000000,
+    contractor: "NBCC India",
+    contractorType: "Government",
+    status: "Ongoing",
+  },
+  {
+    name: "Bharatmala Expressway Project",
+    ministry: "Ministry of Road Transport",
+    sector: "Infrastructure",
+    desc: "Construction of national expressway corridors",
+    date: "2024-07-10",
+    announced: 15000000000,
+    sanctioned: 14900000000,
+    used: 9000000000,
+    contractor: "Afcons Infra",
+    contractorType: "Private",
+    status: "Ongoing",
+  },
+];
+
+/* ============================================================
+   LOAD MINISTRY & SECTOR FILTERS
+============================================================ */
+function loadMinistriesAndSectors() {
+  const minSelect = document.getElementById("centralMinistry");
+  const secSelect = document.getElementById("centralSector");
+
+  const ministries = [...new Set(centralProjects.map((p) => p.ministry))];
+  const sectors = [...new Set(centralProjects.map((p) => p.sector))];
+
+  ministries.forEach((m) => {
+    const opt = document.createElement("option");
+    opt.value = m;
+    opt.textContent = m;
+    minSelect.appendChild(opt);
+  });
+
+  sectors.forEach((s) => {
+    const opt = document.createElement("option");
+    opt.value = s;
+    opt.textContent = s;
+    secSelect.appendChild(opt);
+  });
+
+  minSelect.onchange = renderCentralProjects;
+  secSelect.onchange = renderCentralProjects;
+}
+
+/* ============================================================
+   RENDER CENTRAL PROJECTS
+============================================================ */
+function renderCentralProjects() {
+  const container = document.getElementById("centralProjectsContainer");
+  container.innerHTML = "";
+
+  const minVal = document.getElementById("centralMinistry").value;
+  const secVal = document.getElementById("centralSector").value;
+
+  centralProjects
+    .filter(
+      (p) =>
+        (minVal === "all" || p.ministry === minVal) &&
+        (secVal === "all" || p.sector === secVal)
+    )
+    .forEach((p) => container.appendChild(projectCard(p)));
+}
+
+/* ============================================================
+   STATE & UT PROJECTS (1 per state)
+============================================================ */
+const stateList = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Andaman & Nicobar Islands",
+  "Chandigarh",
+  "Delhi",
+  "Lakshadweep",
+  "Puducherry",
+  "Jammu & Kashmir",
+  "Ladakh",
+];
+
+function loadStateDropdown() {
+  const stateSelect = document.getElementById("stateSelect");
+  stateList.forEach((state) => {
+    const opt = document.createElement("option");
+    opt.value = state;
+    opt.textContent = state;
+    stateSelect.appendChild(opt);
+  });
+
+  stateSelect.onchange = renderStateProjects;
+}
+
+function renderStateProjects() {
+  const container = document.getElementById("stateProjectsContainer");
+  container.innerHTML = "";
+
+  const state = document.getElementById("stateSelect").value;
+
+  if (!state) return;
+
+  // Auto-generated sample
+  const proj = {
+    name: ${state} Water Conservation Mission,
+    ministry: "State Water Resources Department",
+    sector: "Water",
+    desc: State-level mission to conserve water and build reservoirs in ${state}.,
+    date: "2024-01-01",
+    announced: 1000000000,
+    sanctioned: 850000000,
+    used: 420000000,
+    contractor: ${state} Irrigation Authority,
+    contractorType: "Government",
+    status: "Ongoing",
+  };
+
+  container.appendChild(projectCard(proj));
+}
+
+/* ============================================================
+   PROJECT CARD TEMPLATE
+============================================================ */
+function projectCard(p) {
+  const card = document.createElement("div");
+  card.className = "project-card";
+
+  const remaining = p.sanctioned - p.used;
+  const pct = ((p.used / p.sanctioned) * 100).toFixed(1);
+
+  card.innerHTML = `
+    <div class="project-card-header">
+      <div>
+        <h3 class="project-name">${p.name}</h3>
+        <p class="project-desc">${p.desc}</p>
+      </div>
+      <div class="badges-wrapper">
+        <span class="status-pill ${
+          p.status === "Approved" ? "approved" : "ongoing"
+        }">${p.status}</span>
+      </div>
+    </div>
+
+    <div class="project-meta">
+      <span class="meta-item">🏛️ ${p.ministry}</span>
+      <span class="meta-item">📅 ${p.date}</span>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card metric-announced">
+        <span class="metric-label">Announced</span>
+        <span class="metric-value">₹${p.announced.toLocaleString()}</span>
+      </div>
+
+      <div class="metric-card metric-sanctioned">
+        <span class="metric-label">Sanctioned</span>
+        <span class="metric-value">₹${p.sanctioned.toLocaleString()}</span>
+      </div>
+
+      <div class="metric-card metric-used">
+        <span class="metric-label">Used</span>
+        <span class="metric-value">₹${p.used.toLocaleString()}</span>
+      </div>
+
+      <div class="metric-card metric-remaining">
+        <span class="metric-label">Remaining</span>
+        <span class="metric-value">₹${remaining.toLocaleString()}</span>
+      </div>
+    </div>
+
+    <div class="utilization-row">
+      <div class="utilization-header">
+        <span>Utilization</span>
+        <span>${pct}%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" style="width:${pct}%"></div>
+      </div>
+    </div>
+
+    <div class="contractor-row">
+      <span class="contractor-name">${p.contractor}</span>
+      <span class="contractor-type">${p.contractorType}</span>
+    </div>
+
+    <a class="signatures-link">View Digital Signatures ⬇</a>
+  `;
+
+  return card;
 }
